@@ -1,0 +1,109 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\usepackage{minted}
+
+\title{3 -- Displaying Source Code Well}
+\begin{document}
+
+\maketitle
+
+Suppose you want to include code in your document. Notice that
+I've used a teletype font at some points in this document.
+For example, it looks like \texttt{this}. While you might think
+about using it to write code, it would become near impossible
+to do this for a lot of code.
+
+\section{Bisection}
+
+Let's show some code. We'll only look at the Bisection method, but you
+are free to recreate this for Newton's and Secant methods.
+
+\subsection{Code Snippet (Verbatim)}
+
+A simple to use environment to parse text literally as it's written is \texttt{verbatim}.
+
+\begin{verbatim}
+  def bisection(f, a, b, M, delta, epsilon):
+    u = f(a)
+    v = f(b)
+    e = b - a
+
+    for k in range(1, M + 1):
+        e = e/2
+        c = a + e
+        w = f(c)
+
+        if abs(e) < delta or abs(w) < epsilon:
+            break
+
+        if np.sign(w) != np.sign(u):
+            b = c
+            v = w
+        else:
+            a = c
+            u = w
+
+    return c
+\end{verbatim}
+
+It looks good, the tabs are rendered correctly. But this would be a bummer
+if we've already written this code in another file.
+
+\subsection{Code Snippet (Inline with minted)}
+
+The next three subsections discuss the use of the package \texttt{minted}.
+From henceforth you must add the \texttt{-shell-escape} flag when you compile.
+
+What if we just wanted some short code inline? The \texttt{mintinline} command
+shows code inline. This could be used in a footnote.
+
+\mintinline{python}{def hello_world(): print("Hello, world!")}
+
+
+\subsection{Code Snippet (Minted)}
+
+What about bigger blocks of code? What other cool arguments can we pass?
+\begin{itemize}
+    \item \texttt{linenos} - print line numbers
+    \item \texttt{autogobble} - remove leading whitespace, relative tabbing
+    \item \texttt{breaklines} - break long lines instead of running off
+    \item \texttt{mathescape} - use \texttt{\$} to enter math mode
+\end{itemize}
+
+\begin{minted}[linenos, autogobble, breaklines=true, mathescape=True]{python}
+# test $f(x)$ $\sum_{n=1}^{\infty} \frac{1}{n^2}$
+  def bisection(f, a, b, M, delta, epsilon):
+    u = f(a)
+    v = f(b)
+    e = b - a
+
+    for k in range(1, M + 1):
+        e = e/2
+        c = a + e
+        w = f(c)
+
+        if abs(e) < delta or abs(w) < epsilon:
+            break
+
+        if np.sign(w) != np.sign(u):
+            b = c
+            v = w
+        else:
+            a = c
+            u = w
+
+    return c
+\end{minted}
+\subsection{Code Snippet (Minted with external file)}
+
+What if we already wrote the code in a file and we don't want to
+rewrite it. Then we can use the \texttt{inputminted} command.
+We're still using the \texttt{linenos}, \texttt{autogobble}, \texttt{breaklines=true},
+and \texttt{mathescape=True} arguments.
+
+We have two new arguments, \texttt{firstline} and \texttt{lastline}.
+
+\inputminted[linenos, autogobble, breaklines=true, mathescape=true, firstline=6, lastline=41]{python}{./algorithms/algorithms.py}
+
+\end{document}

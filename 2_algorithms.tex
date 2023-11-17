@@ -1,0 +1,137 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\usepackage[ruled]{algorithm2e}
+
+\title{2 -- Algorithms}
+
+\begin{document}
+\maketitle
+
+What's an excellent way to communicate an algorithm? It sounds
+pretty challenging to do with just words. Below we present the
+\texttt{algorithm2e} package, which allows you to write algorithms
+and pseudocode in LaTeX.
+
+\section{Bisection}
+
+Remember that the Bisection method takes intervals $[a, b]$ and
+chops them in half until the root is found.
+
+\begin{center}
+	\begin{minipage}{0.5\linewidth} % Adjust the minipage width to accomodate for the length of algorithm lines
+		\begin{algorithm}[H]
+			\KwIn{$f, a, b, M, \delta, \epsilon$}  % Algorithm inputs
+			\KwResult{$x$ such that $f(x) \approx 0$} % Algorithm outputs/results
+
+      $u \gets f(a)$
+
+      $v \gets f(b)$
+
+      $e \gets b - a$
+
+        \For{$k=1$ \KwTo $M$}{
+          $e \gets e/2$
+
+          $c \gets a + e$
+
+          $w \gets f(c)$
+
+          \If{$|e| < \delta$ or $|w| < \epsilon$}{
+            {\bf stop}
+          }
+          \If{sign($w$) $\neq$ sign($u$)}{
+            $b \gets c$
+            
+            $v \gets w$
+          }
+          \Else{
+            $a \gets c$
+
+            $u \gets w$
+          }
+        }
+
+			{\bf return} $c$
+			\caption{\texttt{Bisection}} % Algorithm name
+			\label{alg:bisection}   % optional label to refer to
+		\end{algorithm}
+	\end{minipage}
+\end{center}
+
+\section{Newton}
+
+Remember that Newton's method requires the derivative of the function.
+It rides the tangent line at the current point to the $x$-axis, and
+then repeats.
+
+\begin{center}
+	\begin{minipage}{0.5\linewidth} % Adjust the minipage width to accomodate for the length of algorithm lines
+		\begin{algorithm}[H]
+      \KwIn{$f, f', x_0, M, \delta, \epsilon$}
+      \KwResult{$x$ such that $f(x) \approx 0$}
+
+      $v \gets f(x_0)$
+
+      \If{$|v| < \epsilon$}{
+        {\bf stop}
+      }
+
+      \For{$k=1$ \KwTo $M$}{
+        $x_1 \gets x_0 - v/f'(x_0)$
+
+        $v \gets f(x_1)$
+
+        \If{$|x_1 - x_0| < \delta$ or $|v| < \epsilon$}{
+          {\bf stop}
+        }
+
+        $x_0 \gets x_1$
+      }
+
+      {\bf return} $x_1$
+
+
+			\caption{\texttt{Newton's}} % Algorithm name
+			\label{alg:newton}   % optional label to refer to
+		\end{algorithm}
+	\end{minipage}
+\end{center}
+
+\section{Secant}
+
+Similar to Newton's method, Secant method uses the secant line
+and finds the root of that line. Secant method doesn't use the derivative,
+which is cheaper, but it's not as fast as Newton's method.
+
+\begin{center}
+	\begin{minipage}{0.5\linewidth} % Adjust the minipage width to accomodate for the length of algorithm lines
+		\begin{algorithm}[H]
+      \KwIn{$f, a, b, M, \delta, \epsilon$}
+
+      $fa \gets f(a); fb \gets f(b)$
+
+      \For{$k = 2$ \KwTo $M$}{
+        \If{$|fa| < |fb|$}{
+          $a \leftrightarrow b; fa \leftrightarrow fb$
+        }
+        $s \gets (b - a)/(fb - fa)$
+
+        $b \gets a; fb \gets fa$
+
+        $a \gets a - fa * s$
+
+        $fa \gets f(a)$
+
+        \If{$|fa| < \epsilon$ or $|b - a| < \delta$}{
+          {\bf stop}
+        }
+      }
+      {\bf return} $a$
+      
+			\caption{\texttt{Secant}} % Algorithm name
+			\label{alg:secant}   % optional label to refer to
+		\end{algorithm}
+	\end{minipage}
+\end{center}
+\end{document}
