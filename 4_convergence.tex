@@ -7,6 +7,31 @@
 
 \pgfplotsset{compat=1.18}
 
+\newcommand{\plotcsv}[5]{
+    \begin{tikzpicture}
+    \begin{axis}
+        [
+        title = {#1},
+        xlabel = {Iteration},
+        ylabel = {Relative Error},
+        ymode = log,
+        grid = major,
+        table/col sep=comma,
+        width=#2\textwidth,
+        height=#3\textwidth,
+        ytick={1e-16, 1e-14, 1e-12, 1e-10, 1e-8, 1e-6, 1e-4, 1e-2, 1e0},
+        ]
+        \addplot[color=#4, mark=*] table[x=k, y=relerror] {#5};
+
+        \pgfplotstableread[col sep=comma]{#5}\datatable
+        \pgfplotstablegetrowsof{\datatable}
+        \pgfmathsetmacro{\rows}{\pgfplotsretval - 1}
+
+        \addplot[red, dotted, very thick] coordinates {(0, 2.220446e-16) (\rows, 2.220446e-16)};
+    \end{axis}
+    \end{tikzpicture}
+}
+
 \title{4 -- Convergence Plots and Tables}
 
 \begin{document}
@@ -24,17 +49,28 @@ Bisection method is the slowest out of the three methods. It converges
 linearly, as the error halves each step. In the plot below it makes sense
 that error looks linear on a log scale.
 
-\subsection{Plot}
+\subsection{Plot (Matplotlib)}
 
 Here's a matplotlib plot, generated in Python, of the relative error of the
 bisection method. The dotted red line is the machine epsilon. Any values lower
 than this are meaningless, equivalent to random noise. Once the function
 reaches machine epsilon, we consider the root found.
 
-\begin{figure}
+\begin{figure}[h]
     \centering
     \includegraphics[scale=0.7]{./plots/bisectionrel.png}
     \caption {A matplotlib plot of the relative error of the Bisection method}
+\end{figure}
+
+\newpage
+
+\subsection{Plot (TikZ)}
+
+Here's a plot, generated in \LaTeX, of the relative error of the bisection method.
+
+\begin{figure}[h]
+    \centering
+    \plotcsv{Bisection Method}{1}{0.7}{blue}{./tables/bisectionrel.csv}
 \end{figure}
 
 \newpage
@@ -77,7 +113,7 @@ We can instead control how the table is rendered. Let's use
 
 Let's show the same convergence plots and tables for Newton's method.
 
-\subsection{Plot}
+\subsection{Plot (Matplotlib)}
 
 \begin{figure}[h]
     \centering
@@ -85,6 +121,14 @@ Let's show the same convergence plots and tables for Newton's method.
     \caption{A matplotlib plot of the relative error of Newton's method}
 \end{figure}
 
+\newpage
+
+\subsection{Plot (TikZ)}
+
+\begin{figure}[h]
+    \centering
+    \plotcsv{Newton's Method}{1}{0.35}{blue}{./tables/newtonrel.csv}
+\end{figure}
 
 \subsection{Table (Ugly)}
 
@@ -121,7 +165,7 @@ Again, we can make it look better.
 For this function $f(x) = e^{-x} \sin(e^x)$, Secant and Newton perform similarly.
 This function's derivative is not too expensive to calculate, it could be much worse.
 
-\subsection{Plot}
+\subsection{Plot (Matplotlib)}
 
 Here's a matplotlib plot, generated in Python, of the relative error of the
 secant method.
@@ -130,6 +174,17 @@ secant method.
     \centering
     \includegraphics[scale=0.8]{./plots/secantrel.png}
     \caption{A matplotlib plot of the relative error of the Secant method}
+\end{figure}
+
+\newpage
+
+\subsection{Plot (TikZ)}
+
+Here's a plot, generated in \LaTeX, of the relative error of the secant method
+
+\begin{figure}[h]
+    \centering
+    \plotcsv{Secant Method}{1}{0.35}{blue}{./tables/secantrel.csv}
 \end{figure}
 
 
