@@ -1,8 +1,6 @@
 import numpy as np
 import pandas as pd
 
-import IPython
-
 def bisection_method(f, a, b, M, delta, epsilon):
     print("Bisection method")
     
@@ -53,7 +51,7 @@ def newtons_method(f, fprime, x_init, M, delta, epsilon):
     if abs(v) < epsilon:
         print("Halt")
         print(f"abs(v) < epsilon: {abs(v) < epsilon}")
-        df.to_csv('newton.csv', index=False)
+        df.to_csv('./tables/newton.csv', index=False)
         return x0
 
     for k in range(1, M):
@@ -154,4 +152,3 @@ if __name__ == "__main__":
     print(f"pretty secant: {secant(f, a, b, 1000, epsilon, delta)}\n")
 
     print("Actual root: 1.1447")
-    
