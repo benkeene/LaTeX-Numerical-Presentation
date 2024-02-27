@@ -30,6 +30,7 @@ $(PLOTS): $(PROCESSCSV)
 clean:
 	rm -f *.aux *.log *.fdb_latexmk *.fls *.dvi
 	rm -rf _minted-*
+	rm -rf *.synctex.gz
 
 
 # end
