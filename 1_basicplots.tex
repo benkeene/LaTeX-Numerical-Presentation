@@ -12,6 +12,13 @@
 \section{Basic Plots}
 \subsection{$f$ and $f'$}
 
+\[
+  f(x) = e^{-x} \sin(e^x)
+\]
+\[
+  f'(x) = -e^{-x} \sin(e^x) + e^{-x} \cos(e^x) e^x
+\]
+
 Because we're discussing root-finding algorithms, let's plot $f$ and $f'$.
 
 \subsubsection{png - matplotlib}
@@ -20,7 +27,7 @@ The standard method people usually use to plot in LaTeX.
 
 \begin{figure}[h]
   \centering
-  \includegraphics[scale=0.8]{./plots/ffp}
+  \includegraphics[scale=0.6]{./plots/ffp}
   \caption{A plot of $f$ and $f'$, $a = 0.5$ and $b = 1.2$}
 \end{figure}
 
@@ -38,7 +45,7 @@ You can play around with positioning, and size.
   \caption{An SVG plot of $f$ and $f'$, $a = 0.5$ and $b = 1.2$}
 \end{figure}
 
-Not going to implement here, as Overleaf struggles with this.
+Commented out, as Overleaf struggles with this.
 You'd have to include the \texttt{svg} package in your preamble
 and make sure \texttt{Inkscape} is installed and in your PATH.
 Vector graphics do look good though, definitely an option.

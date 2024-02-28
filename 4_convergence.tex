@@ -49,6 +49,7 @@ Bisection method is the slowest out of the three methods. It converges
 linearly, as the error halves each step. In the plot below it makes sense
 that error looks linear on a log scale.
 
+\newpage
 \subsection{Plot (Matplotlib)}
 
 Here's a matplotlib plot, generated in Python, of the relative error of the
@@ -62,8 +63,8 @@ reaches machine epsilon, we consider the root found.
     \caption {A matplotlib plot of the relative error of the Bisection method}
 \end{figure}
 
-\newpage
 
+\newpage
 \subsection{Plot (TikZ)}
 
 Here's a plot, generated in \LaTeX, of the relative error of the bisection method.
@@ -81,19 +82,19 @@ Here's a directly imported table from a CSV file. Notice that the
 columns aren't bolded, and the elements are left aligned. This
 is bad practice for tables of numbers.
 
-\newpage
-\begin{figure}
+\begin{figure}[!htbp]
     \centering
     \csvautotabular{./tables/bisectionrel.csv}
     \caption{Wow this table is too long}
 \end{figure}
 
+\newpage
 \subsection{Table (Nice)}
 
 We can instead control how the table is rendered. Let's use
-\LaTeX formatting for the math symbols.
+ \LaTeX formatting for the math symbols.
 
-\begin{figure}
+\begin{figure}[!htbp]
     \centering
     \begin{tabular}{|r|r|r|r|}\hline%
     $k$ & $x$ & $f(x)$ & \bfseries Rel. Error\\\hline\hline
@@ -105,6 +106,11 @@ We can instead control how the table is rendered. Let's use
     \end{tabular}
     \caption{This table is still too long, but it does look better}
 \end{figure}
+
+
+
+
+
 
 \newpage
 
@@ -147,7 +153,7 @@ the number of zeros doubles.
 
 Again, we can make it look better.
 
-\begin{figure}[h]
+\begin{figure}[!htbp]
     \centering
     \begin{tabular}{|r|r|r|r|}\hline%
     $k$ & $x_k$ & $f(x_k)$ & \bfseries Rel. Error\\\hline\hline
@@ -182,17 +188,18 @@ secant method.
 
 Here's a plot, generated in \LaTeX, of the relative error of the secant method
 
-\begin{figure}[h]
+\begin{figure}[!htbp]
     \centering
     \plotcsv{Secant Method}{1}{0.35}{blue}{./tables/secantrel.csv}
 \end{figure}
 
 
+\newpage
 \subsection{Table (Ugly)}
 
 We can import the table, as well.
 
-\begin{figure}
+\begin{figure}[!htbp]
     \centering
     \csvautotabular{./tables/secantrel.csv}
     \caption{A table of the relative error of the Secant method}
