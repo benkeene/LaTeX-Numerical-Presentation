@@ -8,6 +8,7 @@ While attendees are expected to have a working knowledge of LaTeX, all materials
 If you do not have an account already, you may create one via https://www.overleaf.com/register.
 
 Link to complete project on Overleaf: https://www.overleaf.com/read/djprbvswgxmj#437502
+
 Link to participant project on Overleaf: https://www.overleaf.com/read/ycxywkgbpzfk#c52172
 
 Usage
